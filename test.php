@@ -6,12 +6,16 @@
  * Time: 19:37
  * To change this template use File | Settings | File Templates.
  */
- 
-class test {
+
+class test
+{
 
 }
-class test2 {
-    function main ();
+
+class test2
+{
+    function main();
 
 }
+
 ?>

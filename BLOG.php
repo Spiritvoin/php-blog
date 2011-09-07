@@ -8,43 +8,45 @@
  *
  */
 require_once "sergBD.php";
-$BD =  new sergBD();
+$BD = new sergBD();
 
 ?>
 
 <html>
 <head>
-<title>Обработка HTML формы с помощью PHP</title>
+    <title>Обработка HTML формы с помощью PHP</title>
 </head>
 <body>
 <form action="BLOG.php" method="POST">
 
-<p>title:<br /><input type="text" name="title" id="neme1" value=
+    <p>title:<br/><input type="text" name="title" id="neme1" value=
 <?php
-if(isset($_POST["name1"]))
-{
-    echo $_POST["name1"];
-}
-else{
-     echo $BD->link;
-   $BD->select("title","",0,1);
+if (isset($_POST["name1"])) {
+        echo $_POST["name1"];
+    }
+    else {
+        echo $BD->link;
+        $BD->select("title", "", 0, 1);
 
-        }
-?>
-        />  </p>
-<p><input type="submit" name="go"  value="insert"></p>
+    }
+    ?>
+            /></p>
 
-<p>content:<br /><input type="text" name="content" /></p>
-<p><input type="submit" value="Отправить"></p>
+    <p><input type="submit" name="go" value="insert"></p>
 
-<p>created:<br /><input type="text" name="created" /></p>
-<p><input type="submit" value="Отправить"></p>
+    <p>content:<br/><input type="text" name="content"/></p>
+
+    <p><input type="submit" value="Отправить"></p>
+
+    <p>created:<br/><input type="text" name="created"/></p>
+
+    <p><input type="submit" value="Отправить"></p>
 
 
 </form>
 </body>
 </html>
- <?php
+<?php
 
 
 
