@@ -7,11 +7,10 @@
  * To change this template use File | Settings | File Templates.
  *
  */
-require_once "sergBD.php";
-$BD = new sergBD();
+require_once "BDblog.php";
+$BD = new BDblog();
 
 ?>
-
 <html>
 <head>
     <title>Обработка HTML формы с помощью PHP</title>
@@ -27,7 +26,6 @@ if (isset($_POST["name1"])) {
     else {
         echo $BD->link;
         $BD->select("title", "", 0, 1);
-
     }
     ?>
             /></p>
@@ -47,7 +45,6 @@ if (isset($_POST["name1"])) {
 </body>
 </html>
 <?php
-
 
 
 ?>

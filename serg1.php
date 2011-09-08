@@ -57,10 +57,6 @@ $title = (string)mysql_query($sql, $link) or die (mysql_error());
 echo " ->>>  $title \n";
 
 
-//require_once "sergBD.php";
-//$obj = new sergBD();
-//$obj->connect();
-
 //$_POST[title]="rty";
 
 if (isset($_POST['title'])) {
