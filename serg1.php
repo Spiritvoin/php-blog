@@ -1,4 +1,4 @@
-<?php 
+<?php
 $host = "localhost"; // у большинства хостеров этот параметр именно такой
 $user = "root"; //ваше имя для подключения к MySQL
 $pass = ""; // Ваш пароль для подключения к MySQL
@@ -44,10 +44,10 @@ $sql = "DELETE FROM  blog.blog ORDER BY
 'title'   LIMIT 1";
 mysql_query ($sql,$link) or die (mysql_error());*/
 
-$start = 0;
+$start = 1;
 $stop = $start + 1;
 
-$sql = "SELECT  ` title`
+$sql = "SELECT  `title`
 FROM  `blog`
 LIMIT $start , $stop";
 
@@ -64,9 +64,9 @@ if (isset($_POST['title'])) {
 } else {
 
 }
-//$title = htmlspecialchars($_POST["title"]);
-//$content = htmlspecialchars($_POST["content"]);
-//$created = htmlspecialchars($_POST["created"]);
+$title = htmlspecialchars($_POST["title"]);
+$content = htmlspecialchars($_POST["content"]);
+$created = htmlspecialchars($_POST["created"]);
 
 
 // echo $_POST[' ']= "2";
@@ -81,15 +81,8 @@ if (isset($_POST['title'])) {
 <body>
 <form action="serg1.php" method="POST">
 
-    <p>title:<br/><input type="text" name="title" id="neme1" value=
-    <?php
-    if (isset($_POST["name1"])) {
-        echo $_POST["name1"];
-    }
-    else {
-        echo mysql_query($sql, $link) or die (mysql_error());
-    }
-    ?>
+    <p>title:<br/><input type="text" name="title" id="neme1" value=<?php echo $title ; ?>
+    
             /></p>
 
     <p><input type="submit" name="go" value="insert"></p>
@@ -108,7 +101,12 @@ if (isset($_POST['title'])) {
 </html>
 
 <?php echo $_POST["title"];
-
+$t=$_POST["title"];
+ $sql = "UPDATE `blog`.`blog` SET `content` = $t WHERE
+ `blog`.`title` = 'Title1'
+ AND  `blog`.`content` = 'content1'
+ AND `blog`.`created` = 'created1' LIMIT 1;";
+mysql_query($sql, $link) or die (mysql_error());
 // echo $_POST['value'];
 
 /* Осуществляем проверку вводимых данных и их защиту от враждебных

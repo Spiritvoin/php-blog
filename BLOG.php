@@ -7,44 +7,51 @@
  * To change this template use File | Settings | File Templates.
  *
  */
-require_once "BDblog.php";
+include "BDblog.php";
 $BD = new BDblog();
 
+
+$numb=0;
+
 ?>
+
+
+
+
 <html>
 <head>
-    <title>Обработка HTML формы с помощью PHP</title>
+    <title> <?php echo $BD->select("title", "blog",$numb);?> </title>
 </head>
 <body>
+
 <form action="BLOG.php" method="POST">
-
-    <p>title:<br/><input type="text" name="title" id="neme1" value=
-<?php
-if (isset($_POST["name1"])) {
-        echo $_POST["name1"];
-    }
-    else {
-        echo $BD->link;
-        $BD->select("title", "", 0, 1);
-    }
-    ?>
-            /></p>
-
-    <p><input type="submit" name="go" value="insert"></p>
-
-    <p>content:<br/><input type="text" name="content"/></p>
-
-    <p><input type="submit" value="Отправить"></p>
-
-    <p>created:<br/><input type="text" name="created"/></p>
-
-    <p><input type="submit" value="Отправить"></p>
-
-
+    <input type="submit" name="previous" onclick="<?php  $numb--;?>" value="previous">
+    <input type="submit" name="next" onclick="<?php $numb++; ?>" value="next">
+    <p>title: <?php echo $BD->select("title", "blog",$numb); ?> </p>
+    <p>content: <?php echo $BD->select("content", "blog",$numb); ?> </p>
+    <p>created: <?php echo $BD->select("created", "blog",$numb); ?> </p>
 </form>
+<?php $numb;?>
+
+<form action="BLOG_insert.php" method="POST">
+     <p><input type="submit" name="go" value="insert"></p>
+</form>
+<form action="BLOG_UPDATE.php" method="POST">
+     <p><input type="submit" name="go" value="UPDATE"></p>
+</form>
+
+<form action="BLOG_Delete.php" method="POST">
+     <p><input type="submit" name="go" value="Delete"></p>
+</form>
+
 </body>
 </html>
 <?php
 
+
+/*printf($_POST['title']);
+printf($_POST['content']);
+printf($_POST['created']);
+$BD->insert($_POST['title'],$_POST['content'],$_POST['created']);*/
 
 ?>

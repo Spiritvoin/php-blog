@@ -1,6 +1,4 @@
 <?php
-
-
 class BDblog
 {
     var $bd_name;
@@ -9,39 +7,40 @@ class BDblog
     var $result;
     var $num_rows;
 
-    function sergBD()
+    function BDblog()
     {
-        $config = include ('config.php');
-        $this->bd_name = "Blog"; // Имя создаваемой базы данных
-        $this->table_name = "blog"; // Имя создаваемой таблицы
-        $this->link = mysql_connect($config[$host], $config[$user], $config[$pass]) // Соединение с MySQL
+        $config = include ('config_connect.php');
+        $this->bd_name = 'Blog'; // Имя создаваемой базы данных
+        $this->table_name = 'blog'; // Имя создаваемой таблицы
+        $this->link = mysql_connect($config['host'], $config['user'], $config['pass']) // Соединение с MySQL
         or die ("Невозможно подключиться к MySQL");
-
-        mysql_select_db($thsi->bd_name) // Выбор Базы данных
+        mysql_select_db($this->bd_name) // Выбор Базы данных
         or die ("Невозможно выбрать БД ");
 
-        $this->result = mysql_query("SELECT * FROM `" . $this->table_name . "`", $this->link); // теперь в $result содержится указатель на ответ MySQL
-
-        $this->num_rows = mysql_num_rows($this->result); // получаем число строк в таблице
-        //echo "$num_rows \n" ;
     }
 
-    function   select($name_column, $name_table, $start, $stop)
+    function   select($name_column, $name_table, $numb)
     {
-        $name_table = "blog";
-        $sql = "SELECT   $name_column FROM  $name_table LIMIT $start , $stop";
+        $sql = "SELECT  `${name_column}` FROM  `${name_table}` ";
+        $result = mysql_query($sql, $this->link) or die (mysql_error());
+        for ($i = 0; ($i <= $numb); $i++) {
+            $rows = mysql_fetch_row($result);
+        }
+        return $rows[0];
 
+    }
 
-         echo "------------> $this->link <---------";
-        /* if (!isset($this->link)) {
-             echo mysql_query($sql);
-         } else {
-             echo "error";
-             mysql_error();
-         }*/
-       mysql_query($sql) or die (mysql_error());
+    function insert($title, $content, $created)
+    {
+        $sql = "INSERT INTO  `blog`.`blog` (`title` ,`content` ,`created`) VALUES ('$title',  '$content',  '$created');";
+        mysql_query($sql, $this->link) or die (mysql_error() && mysql_errno());
+    }
 
-        return;
+    function delete($title, $content, $created)
+    {
+
+        $sql = "DELETE FROM `blog` WHERE `title`=$title";
+        mysql_query($sql, $this->link) or die (mysql_error() && mysql_errno());
     }
 
 
