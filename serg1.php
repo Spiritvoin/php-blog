@@ -27,9 +27,9 @@ mysql_select_db($bd_name) // Выбор Базы данных
 or die ("Невозможно выбрать БД ");
 
 $result = mysql_query("SELECT * FROM `" . $table_name . "`", $link); // теперь в $result содержится указатель на ответ MySQL
-
+//var_dump($result);
 $num_rows = mysql_num_rows($result); // получаем число строк в таблице
-echo "$num_rows \n";
+//echo "$num_rows \n";
 
 
 /*$sql = "INSERT INTO `blog` (` title`, `content`, `created`) VALUES ($num_rows, $num_rows+1, $num_rows+2);";
@@ -51,10 +51,10 @@ $sql = "SELECT  `title`
 FROM  `blog`
 LIMIT $start , $stop";
 
-echo mysql_query($sql, $link) or die (mysql_error());
+//echo mysql_query($sql, $link) or die (mysql_error());
 $title = (string)mysql_query($sql, $link) or die (mysql_error());
 
-echo " ->>>  $title \n";
+//echo " ->>>  $title \n";
 
 
 //$_POST[title]="rty";
@@ -64,9 +64,9 @@ if (isset($_POST['title'])) {
 } else {
 
 }
-$title = htmlspecialchars($_POST["title"]);
-$content = htmlspecialchars($_POST["content"]);
-$created = htmlspecialchars($_POST["created"]);
+//$title = htmlspecialchars($_POST["title"]);
+//$content = htmlspecialchars($_POST["content"]);
+//$created = htmlspecialchars($_POST["created"]);
 
 
 // echo $_POST[' ']= "2";
@@ -81,9 +81,7 @@ $created = htmlspecialchars($_POST["created"]);
 <body>
 <form action="serg1.php" method="POST">
 
-    <p>title:<br/><input type="text" name="title" id="neme1" value=<?php echo $title ; ?>
-    
-            /></p>
+    <p>title:<br/><input type="text" name="title" id="neme1"  /></p>
 
     <p><input type="submit" name="go" value="insert"></p>
 
@@ -95,25 +93,41 @@ $created = htmlspecialchars($_POST["created"]);
 
     <p><input type="submit" value="Отправить"></p>
 
+  <?php
+
+    echo "<table border='1'>";
+    echo "<TR>";
+    echo "<TH>title</TH><TH> content </TH><TH> created </TH>";
+    echo '</TR>';
+    echo "--->>",$result,"<<---";
+    while($rows = mysql_fetch_array($result))
+    {
+    echo"<tr>";
+    echo"<td>", $rows [0],"</td><td>", $rows[1] ,"</td><td>", $rows[2],  "</td><td> <p><input type='radio' name='a'> </p>";
+    echo "</tr>";
+    }
+    echo "</table>";
+    ?>
 
 </form>
 </body>
 </html>
 
-<?php echo $_POST["title"];
-$t=$_POST["title"];
- $sql = "UPDATE `blog`.`blog` SET `content` = $t WHERE
+<?php
+// echo $_POST["title"];
+//$t=$_POST["title"];
+ /*$sql = "UPDATE `blog`.`blog` SET `content` = $t WHERE
  `blog`.`title` = 'Title1'
  AND  `blog`.`content` = 'content1'
- AND `blog`.`created` = 'created1' LIMIT 1;";
-mysql_query($sql, $link) or die (mysql_error());
+ AND `blog`.`created` = 'created1' LIMIT 1;";*/
+//mysql_query($sql, $link) or die (mysql_error());
 // echo $_POST['value'];
 
 /* Осуществляем проверку вводимых данных и их защиту от враждебных
 скриптов */
-$title = htmlspecialchars($_POST["title"]);
-$content = htmlspecialchars($_POST["content"]);
-$created = htmlspecialchars($_POST["created"]);
+//$title = htmlspecialchars($_POST["title"]);
+//$content = htmlspecialchars($_POST["content"]);
+//$created = htmlspecialchars($_POST["created"]);
 
 
 /* Проверяем заполнены ли обязательные поля ввода, используя check_input

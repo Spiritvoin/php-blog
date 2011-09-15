@@ -17,11 +17,11 @@ $BD = new BDblog();
 <body>
 <form action="Blog.php" method="POST">
 
-    <p>title: <br/><input type="button" name="content" id="name1" onclick="" value=<?php  echo $BD->select('title', "blog"); ?>  </p>
+    <p>title: <br/><input type="button" name="content" id="name1" onclick="" value=<?php  echo $BD->select('title', "blog",0); ?>  </p>
 
-    <p>content:<br/><input type="text" name="content" id="name2" value=<?php  echo $BD->select('content', "blog"); ?> /></p>
+    <p>content:<br/><input type="text" name="content" id="name2" value=<?php  echo $BD->select('content', "blog",0); ?> /></p>
 
-    <p>created:<br/><input type="text" name="created" value=<?php echo $BD->select("created", "blog"); ?> /></p>
+    <p>created:<br/><input type="text" name="created" value=<?php echo $BD->select("created", "blog",0); ?> /></p>
      <p><input type="submit" name="go" value="insert"></p>
 
     </form>

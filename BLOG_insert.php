@@ -9,7 +9,7 @@
 ?>
 <html>
 <head>
-    <title>Обработка HTML формы с помощью PHP</title>
+    <title>insert</title>
 </head>
 <body>
 <form action="BLOG_insert.php" method="POST">
@@ -27,10 +27,14 @@
 </body>
 </html>
 <?php
-$title = $_POST["title"];
-$content = $_POST["content"];
-$created = $_POST["created"];
-include "BDblog.php";
-$BD = new BDblog();
-$BD->insert($title, $content, $created);
+if ((isset($_POST["title"])) && (isset($_POST["content"])) && (isset($_POST["created"]))) {
+    $title = $_POST["title"];
+    $content = $_POST["content"];
+    $created = $_POST["created"];
+    include "BDblog.php";
+    $BD = new BDblog();
+    $BD->insert($title, $content, $created);
+    echo "успешно сохранино";
+}else
+{echo "заполнены не все поля ";}
 ?>

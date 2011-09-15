@@ -19,15 +19,25 @@ class BDblog
 
     }
 
-    function   select($name_column, $name_table, $numb)
+    function   select_mysql_fetch_row($name_column, $name_table)
     {
         $sql = "SELECT  `${name_column}` FROM  `${name_table}` ";
         $result = mysql_query($sql, $this->link) or die (mysql_error());
-        for ($i = 0; ($i <= $numb); $i++) {
-            $rows = mysql_fetch_row($result);
-        }
+        $rows = mysql_fetch_row($result);
         return $rows[0];
 
+    }
+
+    function   result()
+    {
+        $sql = "SELECT * FROM `" . $this->table_name . "`";
+        return $result = mysql_query($sql, $this->link);
+    }
+
+    function   select_mysql_fetch_array($result)
+    {
+        $rows = mysql_fetch_array($result);
+        return array(0 => $rows[0], 1 => $rows[1], 2 => $rows[2]);
     }
 
     function insert($title, $content, $created)
@@ -38,9 +48,8 @@ class BDblog
 
     function delete($title, $content, $created)
     {
-
         $sql = "DELETE FROM `blog` WHERE `title`=$title";
-        mysql_query($sql, $this->link) or die (mysql_error() && mysql_errno());
+        mysql_query($sql, $this->link) or die (mysql_error());
     }
 
 
