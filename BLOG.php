@@ -28,7 +28,8 @@ $numb;
     while($rows = mysql_fetch_array($result))
     {
     echo"<tr>";
-    echo"<td>", $rows [0],"</td><td>", $rows[1] ,"</td><td>", $rows[2],  "</td><td> <p><input type='radio' name='radio' value=",array(0=>$rows[0],1=>$rows[1],2=>$rows[2]),"> </p>";
+    echo"<td>", $rows [0],"</td><td>", $rows[1] ,"</td><td>", $rows[2],  "</td><td> <p><input type='radio' name='radio'
+     value=",array(0=>$rows[0],1=>$rows[1],2=>$rows[2]),"> </p>";
     echo "</tr>";
     }
     echo "</table>";
