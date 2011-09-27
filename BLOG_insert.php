@@ -24,6 +24,7 @@
 
 
 </form>
+<a href="BLOG.php">BLOG</a>
 </body>
 </html>
 <?php
@@ -34,7 +35,7 @@ if ((isset($_POST["title"])) && (isset($_POST["content"])) && (isset($_POST["cre
     include "BDblog.php";
     $BD = new BDblog();
     $BD->insert($title, $content, $created);
-    echo "успешно сохранино";
+    /*echo "успешно сохранино";*/
 }else
-{echo "заполнены не все поля ";}
+{/*echo "заполнены не все поля ";*/}
 ?>

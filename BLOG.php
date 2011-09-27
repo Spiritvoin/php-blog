@@ -19,51 +19,79 @@ $numb;
 </head>
 <body>
 <form action="BLOG.php" method="POST">
-    <?php
+<?php
+
+    $matrix;
     echo "<table border='1'>";
     echo "<TR>";
     echo "<TH>title</TH><TH> content </TH><TH> created </TH>";
     echo '</TR>';
     $result = $BD->result();
-    while($rows = mysql_fetch_array($result))
+    $i = 0;
+    while ($rows = $BD->select_mysql_fetch_array($result))
     {
-    echo"<tr>";
-    echo"<td>", $rows [0],"</td><td>", $rows[1] ,"</td><td>", $rows[2],  "</td><td> <p><input type='radio' name='radio'
-     value=",array(0=>$rows[0],1=>$rows[1],2=>$rows[2]),"> </p>";
-    echo "</tr>";
+        echo"<tr>";
+        echo"<td>", $rows [1], "</td><td>", $rows[2], "</td><td>", $rows[3], "</td><td> <p><input type='radio' name='radio'
+    value=" . $rows[0] . "> </p>";
+        echo "</tr> ";
     }
-    echo "</table>";
+    echo "</table> </p>";
     ?>
     <p><input type="submit" name="go" value="UPDATE"></p>
+
     <p><input type="submit" name="go" value="Delete"></p>
 
-
 </form>
+<?php
+
+if (isset($_POST['go']) && isset($_POST['radio'])) {
+    switch ($_POST{'go'}) // переключающее выражение
+    {
+        case 'Delete': // константное выражение 1
+            //  echo 'delete';
+            $BD->delete($_POST{'radio'});
+            break;
+        case 'UPDATE': // константное выражение 2
+            //echo 'UPDATE';
+            $result = $BD->result1($_POST{'radio'});
+            $rows = $BD->select_mysql_fetch_array($result);
+            ?>
+
+            title: <input type='text' name='title' value='<?php echo  $rows [1]; ?>'> </p>
+            content: <input type='text' name='content' value='<?php echo $rows [2]; ?> '> </p>
+            created: <input type='text' name='created' value='<?php echo  $rows [3]; ?> '> </p>
+            <form action="BLOG.php" method="POST">
+                <p><input type="submit" name="go" value="save"></p>
+            </form>
+
+                <?php
+                                echo"1";
+            if (isset($_POST['go'])&&($_POST['go']=='save')) {
+                echo "true";
+                $BD->update($rows[0], $rows[1], $rows[2], $rows[3]);
+            } else {
+                echo "null";
+            }
+
+            break;
+
+        default:
+
+    }
+}
+
+
+?>
 <a href="BLOG_insert.php">insert</a>
-
-
-
-
 </body>
 </html>
 
 
 <?php
 
-if (isset($_POST{'radio'})) {
-
-
- 
-echo var_dump($_POST['radio']);
-    echo "1)", $_POST{'radio'};
-} else {
-}
 
 
 
-/*printf($_POST['title']);
-printf($_POST['content']);
-printf($_POST['created']);
-$BD->insert($_POST['title'],$_POST['content'],$_POST['created']);*/
+
 
 ?>

@@ -34,10 +34,16 @@ class BDblog
         return $result = mysql_query($sql, $this->link);
     }
 
+    function   result1($id)
+    {
+        $sql = "SELECT * FROM `" . $this->table_name . "`where `id`=".$id."";
+        return $result = mysql_query($sql, $this->link);
+    }
+
     function   select_mysql_fetch_array($result)
     {
-        $rows = mysql_fetch_array($result);
-        return array(0 => $rows[0], 1 => $rows[1], 2 => $rows[2]);
+
+        return $rows = mysql_fetch_array($result);
     }
 
     function insert($title, $content, $created)
@@ -46,12 +52,18 @@ class BDblog
         mysql_query($sql, $this->link) or die (mysql_error() && mysql_errno());
     }
 
-    function delete($title, $content, $created)
+    function delete($id)
     {
-        $sql = "DELETE FROM `blog` WHERE `title`=$title";
+        $sql = "DELETE FROM `blog` WHERE `id`=$id";
         mysql_query($sql, $this->link) or die (mysql_error());
     }
-
+    function update($id,$title,$content,$created)
+    {
+//              UPDATE `blog`.`blog` SET `title` = 'ttt', `content` = 'ttttt', `created` = 'ttttt' WHERE `blog`.`id` = '12'
+        $sql = "UPDATE `blog`.`blog` SET `title` = '".$title."', `content` = '".$content."', `created` = '".$created."' WHERE `blog`.`id` = '".$id."'";
+         mysql_query($sql, $this->link) or die (mysql_error());
+        echo "save";
+    }
 
 }
 
